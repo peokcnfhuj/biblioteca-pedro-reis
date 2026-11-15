@@ -1,0 +1,1574 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="data:," />
+    <title>Biblioteca do Pedro Reis — extensão da Arcanum Academy</title>
+    <meta name="description" content="A biblioteca de Pedro Reis — o acervo da Arcanum Academy, by PVSR Holding Tech." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --space: #02020a;
+        --space-2: #04040f;
+        --panel: #0a0a20;
+        --blue: #3b82f6;
+        --blue-bright: #7db4ff;
+        --blue-deep: #1d4ed8;
+        --accent: #3b82f6;
+        --accent-bright: #8ab8ff;
+        --accent-deep: #1d4ed8;
+        --gold: #d4af37;
+        --gold-bright: #f0d47a;
+        --gold-deep: #9a7b24;
+        --silver: #c9ccd6;
+        --silver-dim: #9aa0b0;
+        --ink: #e9e6da;
+        --ink-soft: #b9b6ab;
+        --line: rgba(201, 204, 214, 0.16);
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(1100px 600px at 50% -8%, rgba(37, 99, 235, 0.5), transparent 62%),
+          radial-gradient(900px 700px at 88% 108%, rgba(29, 78, 216, 0.38), transparent 60%),
+          radial-gradient(700px 480px at 6% 32%, rgba(124, 58, 237, 0.16), transparent 60%),
+          linear-gradient(180deg, var(--space-2), var(--space) 40%, #020205);
+        color: var(--ink);
+        font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+        font-size: 1.125rem;
+        line-height: 1.55;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      #stars {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .wrap {
+        position: relative;
+        z-index: 1;
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 20px 64px;
+      }
+
+      /* ---------- Cabeçalho ---------- */
+      header {
+        text-align: center;
+        padding: 56px 8px 40px;
+      }
+      .brand {
+        font-family: "Cinzel", serif;
+        font-size: 0.82rem;
+        letter-spacing: 0.42em;
+        text-transform: uppercase;
+        color: var(--silver);
+        margin: 0;
+      }
+      .brand-by {
+        display: block;
+        margin-top: 10px;
+        font-size: 0.72rem;
+        letter-spacing: 0.3em;
+        color: var(--accent);
+        text-transform: uppercase;
+      }
+      .rule {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        max-width: 340px;
+        margin: 26px auto 0;
+      }
+      .rule::before, .rule::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.65), transparent);
+      }
+      .rule .diamond {
+        width: 7px; height: 7px;
+        background: var(--accent);
+        transform: rotate(45deg);
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+      }
+      h1.title {
+        font-family: "Cinzel", serif;
+        font-weight: 700;
+        font-size: clamp(2.6rem, 11vw, 4.6rem);
+        letter-spacing: 0.12em;
+        margin: 22px 0 6px;
+        color: var(--accent-bright);
+        text-shadow: 0 0 34px rgba(59, 130, 246, 0.35), 0 2px 0 rgba(0,0,0,0.6);
+      }
+      .subtitle {
+        margin: 10px auto 0;
+        max-width: 560px;
+        font-size: 1.2rem;
+        font-style: italic;
+        color: var(--ink-soft);
+      }
+      .author-line {
+        margin-top: 16px;
+        font-family: "Cinzel", serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        color: var(--silver-dim);
+      }
+      .author-line b { color: var(--silver); font-weight: 600; }
+
+      /* ---------- Aviso pré-venda / ecossistema Arcanum ---------- */
+      .exclusive-banner {
+        margin: 30px auto 0;
+        max-width: 760px;
+        text-align: center;
+        padding: 20px 24px;
+        border: 1px solid rgba(59, 130, 246, 0.65);
+        border-radius: 6px;
+        background: linear-gradient(180deg, rgba(59, 130, 246, 0.14), rgba(59, 130, 246, 0.04));
+        box-shadow: 0 0 28px rgba(59, 130, 246, 0.14);
+      }
+      .exclusive-banner .exclusive-main {
+        margin: 0;
+        font-family: "Cinzel", serif;
+        font-size: 1.02rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        line-height: 1.5;
+        color: var(--accent-bright);
+      }
+      .exclusive-banner .exclusive-sub {
+        margin: 8px 0 0;
+        font-size: 0.98rem;
+        font-style: italic;
+        color: var(--silver);
+      }
+
+      /* ---------- Seções ---------- */
+      section { margin-top: 54px; }
+      .section-head {
+        display: flex;
+        align-items: baseline;
+        gap: 18px;
+        margin-bottom: 26px;
+      }
+      .section-head h2 {
+        font-family: "Cinzel", serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--silver);
+        margin: 0;
+        white-space: nowrap;
+      }
+      .section-head h2 .accent { color: var(--accent); }
+      .section-head .line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(201,204,214,0.35), transparent);
+        transform: translateY(-4px);
+      }
+      .section-head .count {
+        font-family: "Cinzel", serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.2em;
+        color: var(--silver-dim);
+        white-space: nowrap;
+      }
+      @media (max-width: 560px) {
+        .section-head { flex-wrap: wrap; gap: 8px 14px; }
+        .section-head h2 {
+          font-size: 1.02rem;
+          letter-spacing: 0.16em;
+          white-space: normal;
+        }
+        .section-head .line { display: none; }
+      }
+
+      /* ---------- Grade de livros ---------- */
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+      @media (min-width: 640px) {
+        .grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (min-width: 1024px) {
+        .grid { grid-template-columns: repeat(3, 1fr); }
+      }
+
+      .book {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.008));
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 30px 24px 26px;
+      }
+      .book h3 {
+        font-family: "Cinzel", serif;
+        font-size: 1.12rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        line-height: 1.45;
+        color: var(--ink);
+        margin: 22px 0 6px;
+      }
+      .meta {
+        font-family: "Cinzel", serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin: 0;
+      }
+      .meta .pages { color: var(--silver-dim); }
+      .desc {
+        margin: 14px 0 0;
+        color: var(--ink-soft);
+        font-size: 1.08rem;
+        flex: 1;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 22px;
+        min-height: 48px;
+        padding: 12px 26px;
+        font-family: "Cinzel", serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #081226;
+        background: linear-gradient(180deg, var(--accent-bright), var(--accent) 55%, var(--accent-deep));
+        border: 1px solid #bfdbfe;
+        border-radius: 4px;
+        box-shadow: 0 6px 22px rgba(59, 130, 246, 0.28), inset 0 1px 0 rgba(255,255,255,0.5);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      .btn:hover, .btn:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(59, 130, 246, 0.42), inset 0 1px 0 rgba(255,255,255,0.55);
+        outline: none;
+      }
+      .btn:active { transform: translateY(0); }
+      button.btn { cursor: pointer; font-family: "Cinzel", serif; }
+
+      .btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 22px;
+      }
+      .btn-row .btn { margin-top: 0; }
+      .btn.secondary {
+        color: var(--accent-bright);
+        background: rgba(59, 130, 246, 0.05);
+        border: 1px solid rgba(59, 130, 246, 0.55);
+        box-shadow: none;
+      }
+      .btn.secondary:hover, .btn.secondary:focus-visible {
+        background: rgba(59, 130, 246, 0.14);
+        box-shadow: 0 8px 22px rgba(59, 130, 246, 0.22);
+      }
+
+      /* ---------- Leitor nativo ---------- */
+      .reader {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(2, 2, 6, 0.92);
+        padding: 12px;
+      }
+      .reader.open { display: flex; }
+      .reader-box {
+        position: relative;
+        width: min(860px, 100%);
+        height: min(94dvh, 100%);
+        display: flex;
+        flex-direction: column;
+        background: var(--panel);
+        border: 1px solid rgba(59, 130, 246, 0.5);
+        border-radius: 8px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85), 0 0 40px rgba(59, 130, 246, 0.12);
+        overflow: hidden;
+      }
+      .reader-progressbar {
+        height: 3px;
+        background: rgba(201, 204, 214, 0.14);
+        flex: none;
+      }
+      .reader-progressbar span {
+        display: block;
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--accent-deep), var(--accent-bright));
+        box-shadow: 0 0 8px rgba(59, 130, 246, 0.7);
+        transition: width 0.2s ease;
+      }
+      .reader-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 13px 18px 9px;
+      }
+      .reader-head h3 {
+        font-family: "Cinzel", serif;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        color: var(--accent-bright);
+        margin: 0;
+        flex: 1;
+        text-align: left;
+        line-height: 1.4;
+      }
+      .reader-close {
+        flex: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 44px;
+        padding: 10px 18px;
+        font-family: "Cinzel", serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--silver);
+        background: rgba(201, 204, 214, 0.06);
+        border: 1px solid rgba(201, 204, 214, 0.4);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .reader-close:hover, .reader-close:focus-visible {
+        color: var(--accent-bright);
+        border-color: rgba(59, 130, 246, 0.6);
+        outline: none;
+      }
+      .reader-tools {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 18px 12px;
+        border-bottom: 1px solid var(--line);
+      }
+      .tool-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        min-height: 40px;
+        padding: 8px 14px;
+        font-family: "Cinzel", serif;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--silver);
+        background: rgba(201, 204, 214, 0.05);
+        border: 1px solid rgba(201, 204, 214, 0.3);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .tool-btn:hover, .tool-btn:focus-visible {
+        color: var(--accent-bright);
+        border-color: rgba(59, 130, 246, 0.6);
+        outline: none;
+      }
+      .tool-btn.active {
+        color: var(--accent-bright);
+        border-color: var(--accent);
+        background: rgba(59, 130, 246, 0.12);
+      }
+      .tool-spacer { flex: 1; }
+      .reader-pct {
+        font-family: "Cinzel", serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.14em;
+        color: var(--accent);
+        white-space: nowrap;
+      }
+      .reader-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 26px clamp(20px, 6vw, 54px) 34px;
+        scroll-behavior: smooth;
+      }
+      .reader-chap-kicker {
+        font-family: "Cinzel", serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--silver-dim);
+        margin: 0 0 8px;
+        text-align: center;
+      }
+      .reader-chap-title {
+        font-family: "Cinzel", serif;
+        font-size: 1.45rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        line-height: 1.35;
+        color: var(--accent-bright);
+        text-align: center;
+        margin: 0 auto 26px;
+        max-width: 560px;
+      }
+      .reader-text { font-size: 1.13rem; line-height: 1.75; color: var(--ink); }
+      .reader-text p { margin: 0 0 1.05em; }
+      .reader-text h4 {
+        font-family: "Cinzel", serif;
+        font-size: 1.02em;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        color: var(--accent);
+        margin: 1.7em 0 0.7em;
+      }
+      .reader-text h5 {
+        font-family: "Cinzel", serif;
+        font-size: 0.95em;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        color: var(--silver);
+        margin: 1.5em 0 0.6em;
+      }
+      .reader-text ul { margin: 0 0 1.05em; padding-left: 1.3em; }
+      .reader-text li { margin-bottom: 0.4em; }
+      .reader-text hr { border: 0; border-top: 1px solid var(--line); margin: 1.8em auto; max-width: 200px; }
+      .reader-text .ficha {
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        background: rgba(59, 130, 246, 0.05);
+        border-radius: 6px;
+        padding: 16px 20px 8px;
+        margin: 0 0 1.4em;
+      }
+      .reader-text .ficha p { margin: 0 0 0.55em; font-size: 0.94em; }
+      .reader-text .ficha strong { color: var(--accent-bright); font-weight: 600; }
+      .reader-text .ficha .ficha-label {
+        font-family: "Cinzel", serif;
+        font-size: 0.7em;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.9em;
+      }
+      .reader-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-between;
+        margin-top: 34px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+      }
+      .reader-nav .tool-btn[disabled] { opacity: 0.35; cursor: default; }
+      .reader-nav .tool-btn[disabled]:hover { color: var(--silver); border-color: rgba(201, 204, 214, 0.3); }
+      .reader-note {
+        margin: 0;
+        padding: 10px 18px;
+        font-size: 0.98rem;
+        font-style: italic;
+        color: var(--silver-dim);
+        border-top: 1px solid var(--line);
+        text-align: center;
+      }
+      .reader-panel {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        background: rgba(7, 7, 15, 0.985);
+      }
+      .reader-panel[hidden] { display: none; }
+      .reader-panel-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 18px 12px;
+        border-bottom: 1px solid var(--line);
+      }
+      .reader-panel-head h4 {
+        font-family: "Cinzel", serif;
+        font-size: 0.95rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--accent-bright);
+        margin: 0;
+        flex: 1;
+      }
+      .reader-panel-list { flex: 1; overflow-y: auto; padding: 10px 12px 20px; }
+      .panel-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        text-align: left;
+        padding: 11px 12px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.08rem;
+        color: var(--ink);
+        background: none;
+        border: 0;
+        border-bottom: 1px solid rgba(201, 204, 214, 0.08);
+        cursor: pointer;
+      }
+      .panel-item:hover, .panel-item:focus-visible { color: var(--accent-bright); outline: none; }
+      .panel-item.current { color: var(--accent-bright); }
+      .panel-item .num {
+        font-family: "Cinzel", serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        color: var(--silver-dim);
+        min-width: 30px;
+      }
+      .panel-empty {
+        padding: 26px 16px;
+        text-align: center;
+        font-style: italic;
+        color: var(--silver-dim);
+        font-size: 1.05rem;
+      }
+      .card-progress {
+        width: 100%;
+        max-width: 240px;
+        height: 3px;
+        margin-top: 14px;
+        background: rgba(201, 204, 214, 0.14);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      .card-progress span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent-deep), var(--accent-bright));
+      }
+
+      /* ---------- Continuar lendo (topo) ---------- */
+      #continue-section[hidden] { display: none; }
+      .continue-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      @media (min-width: 760px) {
+        .continue-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      .continue-card {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        background: linear-gradient(180deg, rgba(59, 130, 246, 0.07), rgba(255, 255, 255, 0.012));
+        border: 1px solid rgba(59, 130, 246, 0.45);
+        border-radius: 6px;
+        padding: 18px 20px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      }
+      .cover.mini {
+        width: 82px;
+        padding: 10px 8px 9px;
+        box-shadow:
+          -5px 0 0 -2px #0a0a12,
+          -6px 0 0 -2px rgba(59, 130, 246, 0.35),
+          0 10px 20px rgba(0, 0, 0, 0.7),
+          inset 0 0 24px rgba(0, 0, 0, 0.85);
+      }
+      .cover.mini::after { inset: 5px 5px 5px 10px; }
+      .cover.mini .c-top { font-size: 0.32rem; letter-spacing: 0.22em; }
+      .cover.mini .c-orn { margin: 4px 0 1px; }
+      .cover.mini .c-orn svg { width: 28px; height: 28px; }
+      .cover.mini .c-title { font-size: 0.6rem; line-height: 1.4; margin-top: 2px; }
+      .cover.mini .c-sub { font-size: 0.38rem; letter-spacing: 0.2em; margin-top: 3px; }
+      .cover.mini .c-author { font-size: 0.4rem; letter-spacing: 0.2em; }
+      .cover.mini .c-rule { width: 26px; margin-top: 5px; }
+      .continue-info { flex: 1; min-width: 0; text-align: left; }
+      .continue-info h3 {
+        font-family: "Cinzel", serif;
+        font-size: 1.02rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        line-height: 1.4;
+        color: var(--ink);
+        margin: 0 0 4px;
+      }
+      .continue-where {
+        margin: 0;
+        font-size: 1.04rem;
+        color: var(--ink-soft);
+      }
+      .continue-where .done { color: var(--accent-bright); }
+      .continue-info .card-progress { max-width: none; margin-top: 10px; }
+      .continue-info .btn { margin-top: 14px; min-height: 44px; padding: 10px 20px; }
+      a.tool-btn { text-decoration: none; }
+      @media (max-width: 420px) {
+        .continue-card { gap: 14px; padding: 14px; }
+        .cover.mini { width: 68px; }
+      }
+      @media (max-width: 560px) {
+        .reader { padding: 6px; }
+        .reader-head { padding: 10px 12px 6px; }
+        .reader-head h3 { font-size: 0.85rem; }
+        .reader-tools { padding: 4px 12px 10px; }
+        .reader-body { padding: 20px 18px 28px; }
+        .reader-chap-title { font-size: 1.25rem; }
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 22px;
+        min-height: 40px;
+        padding: 9px 18px;
+        font-family: "Cinzel", serif;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        border-radius: 999px;
+      }
+      .badge.silver {
+        color: var(--silver);
+        border: 1px solid rgba(201, 204, 214, 0.45);
+        background: rgba(201, 204, 214, 0.06);
+      }
+      .badge.gold {
+        color: var(--accent-bright);
+        border: 1px solid rgba(59, 130, 246, 0.55);
+        background: rgba(59, 130, 246, 0.08);
+      }
+      .badge .dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: currentColor;
+        box-shadow: 0 0 8px currentColor;
+      }
+
+      /* ---------- Capas em CSS ---------- */
+      .cover {
+        --book: #3b82f6;
+        --book-soft: rgba(59, 130, 246, 0.35);
+        position: relative;
+        width: 168px;
+        aspect-ratio: 5 / 7.4;
+        flex: none;
+        background:
+          radial-gradient(120% 90% at 50% 0%, #14141f 0%, #05050a 62%),
+          #05050a;
+        border: 1px solid var(--book-soft);
+        border-radius: 3px 8px 8px 3px;
+        box-shadow:
+          -7px 0 0 -2px #0a0a12,
+          -8px 0 0 -2px var(--book-soft),
+          0 18px 34px rgba(0, 0, 0, 0.75),
+          inset 0 0 40px rgba(0, 0, 0, 0.85);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 14px 16px;
+        text-align: center;
+        overflow: hidden;
+      }
+      .cover::before {
+        /* lombada */
+        content: "";
+        position: absolute;
+        left: 0; top: 0; bottom: 0;
+        width: 9px;
+        background: linear-gradient(90deg, rgba(0,0,0,0.9), var(--book-soft) 55%, rgba(0,0,0,0.55));
+      }
+      .cover::after {
+        /* moldura dupla prata/dourada */
+        content: "";
+        position: absolute;
+        inset: 8px 8px 8px 15px;
+        border: 1px solid rgba(201, 204, 214, 0.5);
+        outline: 1px solid var(--book-soft);
+        outline-offset: 3px;
+        pointer-events: none;
+      }
+      .cover .c-top {
+        font-family: "Cinzel", serif;
+        font-size: 0.5rem;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        color: var(--silver-dim);
+        margin: 2px 0 0;
+      }
+      .cover .c-orn { margin: 8px 0 2px; line-height: 0; }
+      .cover .c-orn svg { display: block; margin: 0 auto; }
+      .cover .c-title {
+        font-family: "Cinzel", serif;
+        font-weight: 700;
+        font-size: 0.98rem;
+        letter-spacing: 0.08em;
+        line-height: 1.5;
+        color: var(--book);
+        text-shadow: 0 0 14px var(--book-soft);
+        margin: 4px 2px 0;
+      }
+      .cover .c-sub {
+        font-family: "Cinzel", serif;
+        font-size: 0.58rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--book);
+        margin: 6px 0 0;
+      }
+      .cover .c-author {
+        font-family: "Cinzel", serif;
+        font-size: 0.62rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--silver);
+        margin: 0;
+      }
+      .cover .c-rule {
+        width: 44px;
+        height: 1px;
+        margin: 8px auto 0;
+        background: linear-gradient(90deg, transparent, var(--book), transparent);
+      }
+      .cover.soon { filter: saturate(0.72); }
+
+      /* ---------- Rodapé ---------- */
+      footer {
+        margin-top: 70px;
+        text-align: center;
+        border-top: 1px solid var(--line);
+        padding-top: 34px;
+      }
+      footer .phrase {
+        font-style: italic;
+        font-size: 1.25rem;
+        color: var(--silver);
+        margin: 0 auto 14px;
+        max-width: 520px;
+      }
+      footer .legal {
+        font-family: "Cinzel", serif;
+        font-size: 0.74rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--silver-dim);
+        margin: 0;
+      }
+      footer .legal .accent { color: var(--accent); }
+      footer .made-by {
+        font-family: "Cinzel", serif;
+        font-size: 0.92rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--accent-bright);
+        margin: 18px 0 0;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .btn { transition: none; }
+      }
+    
+        /* ---------- Correção da grade — 11/11/2026 ---------- */
+        .book[hidden] { display: none; }
+        @media (max-width: 639px) { .grid { grid-template-columns: 1fr; } }
+        .desc { flex: none; }
+        .meta { white-space: nowrap; font-size: 0.68rem; letter-spacing: 0.18em; }
+        .book .btn-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .book .btn-row .btn { margin-top: 0; min-height: 44px; padding: 10px 6px; font-size: 0.62rem; letter-spacing: 0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .book .btn-row .btn svg { display: none; }
+        .book .btn-row .btn .btn-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .btn.is-disabled { opacity: 0.45; cursor: not-allowed; }
+        .soon-note { margin: 12px 0 0; font-size: 0.85rem; font-style: italic; color: var(--silver-dim); }
+        .reader-body { padding-bottom: 72px; }
+        @media (max-width: 560px) { .reader-body { padding-bottom: 64px; } }
+        .reader-note { flex: none; }
+        .toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 20px; }
+        .toolbar input[type="search"] { flex: 1 1 240px; min-height: 46px; padding: 10px 16px; font-family: inherit; font-size: 1rem; color: var(--ink); background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(59, 130, 246, 0.45); border-radius: 4px; }
+        .toolbar input[type="search"]::placeholder { color: var(--silver-dim); }
+        .toolbar input[type="search"]:focus { outline: none; border-color: var(--accent-bright); }
+        .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+        .chip { min-height: 44px; padding: 10px 18px; font-family: "Cinzel", serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--silver); background: rgba(201, 204, 214, 0.06); border: 1px solid rgba(201, 204, 214, 0.4); border-radius: 4px; cursor: pointer; }
+        .chip.active { color: #081226; background: linear-gradient(180deg, var(--accent-bright), var(--accent) 55%, var(--accent-deep)); border-color: #bfdbfe; }
+        .no-results { color: var(--silver-dim); font-style: italic; margin: 0 0 20px; }
+        .empty-state {
+          grid-column: 1 / -1;
+          padding: 56px 24px 64px;
+          text-align: center;
+          border: 1px solid rgba(59, 130, 246, 0.35);
+          border-radius: 18px;
+          background:
+            radial-gradient(420px 220px at 50% 0%, rgba(59, 130, 246, 0.18), transparent 70%),
+            linear-gradient(180deg, rgba(10, 10, 32, 0.9), rgba(4, 4, 15, 0.9));
+          box-shadow: 0 0 44px rgba(37, 99, 235, 0.22);
+        }
+        .empty-state .empty-star { font-size: 2rem; color: var(--accent-bright); text-shadow: 0 0 18px rgba(125, 180, 255, 0.8); }
+        .empty-state h3 { margin: 12px 0 8px; font-size: 1.5rem; color: #eaf1ff; }
+        .empty-state p { margin: 0 auto; max-width: 480px; color: var(--silver); }
+        .empty-state .empty-sub { margin-top: 8px; color: var(--silver-dim); font-style: italic; }
+
+        /* ---------- Área de login (Supabase Auth — e-mail e senha) ---------- */
+        .book { position: relative; }
+        .auth-bar { display: flex; justify-content: flex-end; margin-bottom: 6px; }
+        .auth-btn {
+          min-height: 44px; padding: 10px 22px;
+          font-family: "Cinzel", serif; font-size: 0.72rem; font-weight: 700;
+          letter-spacing: 0.18em; text-transform: uppercase;
+          color: var(--accent-bright); background: rgba(59, 130, 246, 0.08);
+          border: 1px solid rgba(59, 130, 246, 0.55); border-radius: 4px;
+          cursor: pointer;
+        }
+        .auth-btn:hover, .auth-btn:focus-visible { border-color: var(--accent-bright); background: rgba(59, 130, 246, 0.16); }
+        .auth-btn.logged-in { color: var(--silver); border-color: rgba(201, 204, 214, 0.4); background: rgba(201, 204, 214, 0.06); }
+        .fav-btn {
+          position: absolute; top: 10px; right: 10px; z-index: 2;
+          width: 44px; height: 44px; padding: 0;
+          font-size: 1.35rem; line-height: 1; color: var(--silver-dim);
+          background: rgba(3, 3, 7, 0.55); border: 1px solid var(--line);
+          border-radius: 50%; cursor: pointer;
+        }
+        .fav-btn.active { color: var(--accent-bright); border-color: rgba(59, 130, 246, 0.7); text-shadow: 0 0 12px rgba(59, 130, 246, 0.8); }
+        .auth-modal {
+          position: fixed; inset: 0; z-index: 60;
+          display: flex; align-items: flex-start; justify-content: center;
+          padding: 48px 16px 16px;
+          background: rgba(2, 2, 5, 0.82);
+          overflow-y: auto;
+        }
+        .auth-modal[hidden] { display: none; }
+        .auth-box {
+          position: relative; width: 100%; max-width: 440px;
+          background: linear-gradient(180deg, #0d0d1a, #07070f);
+          border: 1px solid rgba(59, 130, 246, 0.55); border-radius: 8px;
+          box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+          padding: 28px 26px 24px; text-align: left;
+        }
+        .auth-box h3 {
+          font-family: "Cinzel", serif; font-size: 1.25rem; letter-spacing: 0.08em;
+          color: var(--accent-bright); margin: 0 34px 6px 0;
+        }
+        .auth-sub { margin: 0 0 14px; font-size: 1.02rem; color: var(--ink-soft); font-style: italic; }
+        .auth-sub.small { font-size: 0.92rem; }
+        .auth-close {
+          position: absolute; top: 10px; right: 10px;
+          width: 44px; height: 44px; font-size: 1.5rem; line-height: 1;
+          color: var(--silver); background: transparent;
+          border: 1px solid transparent; border-radius: 4px; cursor: pointer;
+        }
+        .auth-close:hover { color: var(--accent-bright); border-color: var(--line); }
+        .auth-tabs { display: flex; gap: 8px; margin: 4px 0 18px; }
+        .auth-tab {
+          flex: 1; min-height: 44px; font-family: "Cinzel", serif; font-size: 0.72rem;
+          font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+          color: var(--silver); background: rgba(201, 204, 214, 0.06);
+          border: 1px solid rgba(201, 204, 214, 0.4); border-radius: 4px; cursor: pointer;
+        }
+        .auth-tab.active {
+          color: #081226;
+          background: linear-gradient(180deg, var(--accent-bright), var(--accent) 55%, var(--accent-deep));
+          border-color: #bfdbfe;
+        }
+        .auth-box label {
+          display: block; margin: 0 0 14px;
+          font-family: "Cinzel", serif; font-size: 0.7rem; letter-spacing: 0.2em;
+          text-transform: uppercase; color: var(--silver);
+        }
+        .auth-box input {
+          display: block; width: 100%; margin-top: 7px; min-height: 48px;
+          padding: 10px 14px; font-family: inherit; font-size: 16px;
+          color: var(--ink); background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(59, 130, 246, 0.45); border-radius: 4px;
+        }
+        .auth-box input:focus { outline: none; border-color: var(--accent-bright); }
+        .auth-submit { width: 100%; min-height: 48px; justify-content: center; margin-top: 4px; }
+        .auth-msg { margin: 10px 0; font-size: 1rem; font-style: italic; color: var(--silver); }
+        .auth-msg.error { color: #f0a8a0; }
+        .auth-msg.ok { color: #b9d9a8; }
+        .auth-link {
+          display: block; margin: 14px auto 0; padding: 8px 10px;
+          font-family: inherit; font-size: 1rem; font-style: italic;
+          color: var(--accent-bright); background: none; border: none; cursor: pointer;
+        }
+        .auth-notice {
+          margin: 0 0 14px; padding: 12px 14px; font-size: 1rem;
+          color: var(--accent-bright); background: rgba(59, 130, 246, 0.1);
+          border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 4px;
+        }
+        .auth-h4 {
+          font-family: "Cinzel", serif; font-size: 0.85rem; letter-spacing: 0.16em;
+          text-transform: uppercase; color: var(--accent); margin: 22px 0 10px;
+        }
+        .auth-favs { list-style: none; margin: 0; padding: 0; }
+        .auth-favs li {
+          display: flex; align-items: center; justify-content: space-between; gap: 10px;
+          padding: 9px 0; border-bottom: 1px solid var(--line);
+          font-size: 1.05rem; color: var(--ink);
+        }
+        .auth-favs-empty { color: var(--silver-dim); font-style: italic; }
+        .auth-danger { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+        .btn.danger {
+          color: #f0a8a0; border-color: rgba(240, 168, 160, 0.5);
+          background: rgba(240, 168, 160, 0.06);
+        }
+        .btn.danger.confirm { background: rgba(240, 168, 160, 0.18); }
+        .auth-toast {
+          position: fixed; left: 50%; bottom: 22px; z-index: 70;
+          transform: translateX(-50%); max-width: calc(100vw - 32px);
+          padding: 12px 20px; font-size: 1rem; text-align: center;
+          color: #081226; background: linear-gradient(180deg, var(--accent-bright), var(--accent));
+          border-radius: 4px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+        .auth-toast[hidden] { display: none; }
+        @media (max-width: 560px) {
+          .auth-bar { justify-content: center; }
+          .auth-modal { padding: 24px 12px 12px; }
+          .auth-box { padding: 24px 18px 20px; }
+        }
+</style>
+  </head>
+  <body>
+    <canvas id="stars" aria-hidden="true"></canvas>
+
+    <div class="wrap">
+      <header>
+        <div class="auth-bar">
+          <button class="auth-btn" id="auth-btn" type="button">Entrar</button>
+        </div>
+        <p class="brand">Pedro Reis
+          <span class="brand-by">by PVSR Holding Tech</span>
+        </p>
+        <div class="rule" aria-hidden="true"><span class="diamond"></span></div>
+        <h1 class="title">Biblioteca</h1>
+        <p class="subtitle">O acervo de Pedro Reis — extensão da Arcanum Academy</p>
+        <p class="author-line">Coleção de <b>Pedro Reis</b></p>
+        <div class="exclusive-banner" role="note">
+          <p class="exclusive-main">&#10022; Estes livros s&atilde;o exclusivos para quem comprou na pr&eacute;-venda da Arcanum Academy</p>
+          <p class="exclusive-sub">Faz parte do ecossistema Arcanum</p>
+        </div>
+      </header>
+
+      <main>
+        <!-- ================= CONTINUAR LENDO ================= -->
+        <section id="continue-section" aria-labelledby="continue-title" hidden>
+          <div class="section-head">
+            <h2 id="continue-title">Continuar <span class="accent">Lendo</span></h2>
+            <span class="line" aria-hidden="true"></span>
+            <span class="count" id="continue-count"></span>
+          </div>
+          <div class="continue-grid" id="continue-grid"></div>
+        </section>
+
+        <!-- ================= ACERVO ================= -->
+        <section aria-labelledby="acervo-title">
+          <div class="section-head">
+            <h2 id="acervo-title">Acervo <span class="accent">· Prontos</span></h2>
+            <span class="line" aria-hidden="true"></span>
+            <span class="count" id="acervo-count">0 obras</span>
+          </div>
+
+          <div class="toolbar" id="toolbar">
+            <input type="search" id="book-search" placeholder="Buscar por título..." aria-label="Buscar por título" autocomplete="off">
+            <div class="filters" role="group" aria-label="Filtrar por tipo">
+              <button class="chip active" type="button" data-filter="todos">Todos</button>
+              <button class="chip" type="button" data-filter="ebook">E-books</button>
+              <button class="chip" type="button" data-filter="livreto">Livretos</button>
+              <button class="chip" type="button" data-filter="favoritos">★ Favoritos</button>
+            </div>
+          </div>
+          <p class="no-results" id="no-results" hidden>Nenhuma obra encontrada para essa busca.</p>
+
+          <div class="grid">
+            <div class="empty-state" id="empty-state">
+              <div class="empty-star" aria-hidden="true">✦</div>
+              <h3>O acervo está nascendo</h3>
+              <p>As novas obras de Pedro Reis chegam aqui em breve.</p>
+              <p class="empty-sub">Os livros novos que fizermos daqui pra frente nascem aqui.</p>
+            </div>
+          </div>
+        </section>
+
+        
+      </main>
+
+      <footer>
+        <p class="phrase">“Conhecimento com capa de estrela: cada volume, uma obra completa.”</p>
+        <p class="legal">Biblioteca do Pedro Reis <span class="accent">extensão da Arcanum Academy</span> · © 2026 Pedro Reis</p>
+        <p class="made-by">Feito pela PVSR HOLDING TECH</p>
+      </footer>
+    </div>
+
+    <!-- Leitor nativo: o texto dos livros mora nesta página -->
+    <div class="reader" id="reader" role="dialog" aria-modal="true" aria-labelledby="reader-title" hidden>
+      <div class="reader-box">
+        <div class="reader-progressbar" aria-hidden="true"><span id="reader-bar"></span></div>
+        <div class="reader-head">
+          <h3 id="reader-title">Leitura</h3>
+          <button class="reader-close" id="reader-close" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+            Fechar
+          </button>
+        </div>
+        <div class="reader-tools">
+          <button class="tool-btn" id="toc-open" type="button">Sumário</button>
+          <button class="tool-btn" id="bm-open" type="button">Marcadores</button>
+          <button class="tool-btn" id="bm-toggle" type="button" aria-pressed="false">Marcar capítulo</button>
+          <a class="tool-btn" id="reader-download" href="#" download>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 21h16"/></svg>
+            Salvar PDF
+          </a>
+          <span class="tool-spacer" aria-hidden="true"></span>
+          <span class="reader-pct" id="reader-pct">0%</span>
+          <button class="tool-btn" id="font-dec" type="button" aria-label="Diminuir o tamanho da fonte">A−</button>
+          <button class="tool-btn" id="font-inc" type="button" aria-label="Aumentar o tamanho da fonte">A+</button>
+        </div>
+        <div class="reader-body" id="reader-body" tabindex="0">
+          <p class="reader-chap-kicker" id="reader-chap-meta"></p>
+          <h4 class="reader-chap-title" id="reader-chap-title"></h4>
+          <div class="reader-text" id="reader-text"></div>
+          <div class="reader-nav">
+            <button class="tool-btn" id="chap-prev" type="button">← Capítulo anterior</button>
+            <button class="tool-btn" id="chap-next" type="button">Próximo capítulo →</button>
+          </div>
+        </div>
+        <p class="reader-note">Leitura nativa da Biblioteca: o texto abre na hora, aqui mesmo, e o seu progresso fica salvo neste navegador e, quando você entra na sua conta, também fica guardado nela para continuar em qualquer aparelho. Para baixar o PDF completo ilustrado, toque em “Salvar PDF” aqui em cima ou no card do livro.</p>
+        <div class="reader-panel" id="reader-panel" hidden>
+          <div class="reader-panel-head">
+            <h4 id="reader-panel-title">Sumário</h4>
+            <button class="tool-btn" id="panel-close" type="button">Voltar à leitura</button>
+          </div>
+          <div class="reader-panel-list" id="reader-panel-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Starfield leve: estrelas cintilantes em canvas, sem bibliotecas.
+      (function () {
+        var canvas = document.getElementById("stars");
+        var ctx = canvas.getContext("2d");
+        var stars = [];
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var raf = null;
+
+        function resize() {
+          var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+          canvas.width = Math.floor(window.innerWidth * dpr);
+          canvas.height = Math.floor(window.innerHeight * dpr);
+          var count = Math.min(190, Math.floor((window.innerWidth * window.innerHeight) / 8500));
+          stars = [];
+          for (var i = 0; i < count; i++) {
+            stars.push({
+              x: Math.random() * canvas.width,
+              y: Math.random() * canvas.height,
+              r: Math.random() * 1.3 + 0.3,
+              base: Math.random() * 0.55 + 0.25,
+              speed: Math.random() * 0.9 + 0.25,
+              phase: Math.random() * Math.PI * 2,
+              tint: Math.random()
+            });
+          }
+          if (reduceMotion) draw(0);
+        }
+
+        function draw(t) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (var i = 0; i < stars.length; i++) {
+            var s = stars[i];
+            var tw = reduceMotion ? 1 : 0.65 + 0.35 * Math.sin(s.phase + t * 0.001 * s.speed);
+            var a = s.base * tw;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = s.tint < 0.2
+              ? "rgba(125, 180, 255, " + a + ")"
+              : s.tint < 0.3
+              ? "rgba(240, 212, 122, " + a + ")"
+              : s.tint < 0.38
+              ? "rgba(167, 139, 250, " + a + ")"
+              : "rgba(226, 230, 242, " + a + ")";
+            ctx.fill();
+          }
+          if (!reduceMotion) raf = requestAnimationFrame(draw);
+        }
+
+        resize();
+        if (!reduceMotion) raf = requestAnimationFrame(draw);
+        var resizeTimer;
+        window.addEventListener("resize", function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function () {
+            if (raf) cancelAnimationFrame(raf);
+            resize();
+            if (!reduceMotion) raf = requestAnimationFrame(draw);
+          }, 180);
+        });
+      })();
+    </script>
+
+        <script src="books-1.js"></script>
+    <script src="books-2.js"></script>
+    <script src="books-3.js"></script>
+<script>
+      // Texto integral dos livros, embutido na página: a leitura é nativa e instantânea.
+      var BOOKS = Object.assign({}, BOOKS_P1, BOOKS_P2, BOOKS_P3);
+    </script>
+
+    <script>
+      // Leitor nativo: progresso, marcadores e fonte salvos no navegador do visitante.
+      (function () {
+        var PREFIX = "biblioteca-arcanum:";
+        var reader = document.getElementById("reader");
+        var body = document.getElementById("reader-body");
+        var titleEl = document.getElementById("reader-title");
+        var metaEl = document.getElementById("reader-chap-meta");
+        var chapTitleEl = document.getElementById("reader-chap-title");
+        var textEl = document.getElementById("reader-text");
+        var barEl = document.getElementById("reader-bar");
+        var pctEl = document.getElementById("reader-pct");
+        var closeBtn = document.getElementById("reader-close");
+        var prevBtn = document.getElementById("chap-prev");
+        var nextBtn = document.getElementById("chap-next");
+        var panel = document.getElementById("reader-panel");
+        var panelTitle = document.getElementById("reader-panel-title");
+        var panelList = document.getElementById("reader-panel-list");
+        var bmToggle = document.getElementById("bm-toggle");
+        var dlLink = document.getElementById("reader-download");
+        var PDF_URLS = {};
+        var lastFocus = null;
+        var current = null; // { id, book, ch, lengths, total }
+        var saveTimer = null;
+
+        var FONT_LEVELS = [1.02, 1.13, 1.24, 1.36, 1.48];
+        var fontIdx = 1;
+        try {
+          var savedFont = parseInt(localStorage.getItem(PREFIX + "fontsize"), 10);
+          if (!isNaN(savedFont) && savedFont >= 0 && savedFont < FONT_LEVELS.length) fontIdx = savedFont;
+        } catch (e) {}
+        function applyFont() { textEl.style.fontSize = FONT_LEVELS[fontIdx] + "rem"; }
+        function setFont(d) {
+          fontIdx = Math.min(FONT_LEVELS.length - 1, Math.max(0, fontIdx + d));
+          applyFont();
+          try { localStorage.setItem(PREFIX + "fontsize", String(fontIdx)); } catch (e) {}
+        }
+        document.getElementById("font-dec").addEventListener("click", function () { setFont(-1); });
+        document.getElementById("font-inc").addEventListener("click", function () { setFont(1); });
+
+        function loadProgress(id) {
+          var local = null;
+          try {
+            var raw = localStorage.getItem(PREFIX + "progress:" + id);
+            local = raw ? JSON.parse(raw) : null;
+          } catch (e) { local = null; }
+          // Conta logada: o progresso da nuvem vale quando está mais adiantado.
+          var cloud = window.ArcanumCloud ? window.ArcanumCloud.getProgress(id) : null;
+          if (cloud && (!local || (cloud.pct || 0) >= (local.pct || 0))) return cloud;
+          return local;
+        }
+        function loadBookmarks(id) {
+          try {
+            var raw = localStorage.getItem(PREFIX + "bookmarks:" + id);
+            var arr = raw ? JSON.parse(raw) : [];
+            return Object.prototype.toString.call(arr) === "[object Array]" ? arr : [];
+          } catch (e) { return []; }
+        }
+        function scrollFrac() {
+          var max = body.scrollHeight - body.clientHeight;
+          return max > 0 ? Math.min(1, Math.max(0, body.scrollTop / max)) : 0;
+        }
+        function computePct(frac) {
+          var before = 0;
+          for (var i = 0; i < current.ch; i++) before += current.lengths[i];
+          var p = (before + frac * current.lengths[current.ch]) / current.total * 100;
+          return Math.min(100, Math.max(0, Math.round(p)));
+        }
+        function saveProgress() {
+          if (!current) return;
+          var frac = scrollFrac();
+          var data = { ch: current.ch, frac: frac, pct: computePct(frac) };
+          try { localStorage.setItem(PREFIX + "progress:" + current.id, JSON.stringify(data)); } catch (e) {}
+          if (window.ArcanumCloud) window.ArcanumCloud.saveProgress(current.id, data);
+          barEl.style.width = data.pct + "%";
+          pctEl.textContent = data.pct + "% lido";
+          refreshCards();
+        }
+        function scheduleSave() {
+          if (saveTimer) clearTimeout(saveTimer);
+          saveTimer = setTimeout(saveProgress, 200);
+        }
+        body.addEventListener("scroll", function () {
+          if (!current) return;
+          var frac = scrollFrac();
+          var pct = computePct(frac);
+          barEl.style.width = pct + "%";
+          pctEl.textContent = pct + "% lido";
+          scheduleSave();
+        });
+
+        function updateBookmarkBtn() {
+          var bms = loadBookmarks(current.id);
+          var marked = bms.indexOf(current.ch) >= 0;
+          bmToggle.classList.toggle("active", marked);
+          bmToggle.setAttribute("aria-pressed", marked ? "true" : "false");
+          bmToggle.textContent = marked ? "Capítulo marcado" : "Marcar capítulo";
+        }
+        bmToggle.addEventListener("click", function () {
+          if (!current) return;
+          var bms = loadBookmarks(current.id);
+          var i = bms.indexOf(current.ch);
+          if (i >= 0) bms.splice(i, 1); else bms.push(current.ch);
+          bms.sort(function (a, b) { return a - b; });
+          try { localStorage.setItem(PREFIX + "bookmarks:" + current.id, JSON.stringify(bms)); } catch (e) {}
+          updateBookmarkBtn();
+        });
+
+        function goToChapter(idx, frac) {
+          var chapters = current.book.chapters;
+          current.ch = Math.min(chapters.length - 1, Math.max(0, idx));
+          var ch = chapters[current.ch];
+          titleEl.textContent = current.book.title;
+          metaEl.textContent = "Capítulo " + (current.ch + 1) + " de " + chapters.length;
+          chapTitleEl.textContent = ch.t;
+          textEl.innerHTML = ch.h;
+          prevBtn.disabled = current.ch === 0;
+          nextBtn.disabled = current.ch === chapters.length - 1;
+          updateBookmarkBtn();
+          body.scrollTop = 0;
+          var f = frac || 0;
+          if (f > 0) {
+            requestAnimationFrame(function () {
+              requestAnimationFrame(function () {
+                body.scrollTop = f * (body.scrollHeight - body.clientHeight);
+                saveProgress();
+              });
+            });
+          } else {
+            saveProgress();
+          }
+        }
+        prevBtn.addEventListener("click", function () { if (current && current.ch > 0) goToChapter(current.ch - 1, 0); });
+        nextBtn.addEventListener("click", function () { if (current && current.ch < current.book.chapters.length - 1) goToChapter(current.ch + 1, 0); });
+
+        function openPanel(mode) {
+          panelList.innerHTML = "";
+          if (mode === "toc") {
+            panelTitle.textContent = "Sumário";
+            current.book.chapters.forEach(function (ch, i) {
+              var b = document.createElement("button");
+              b.type = "button";
+              b.className = "panel-item" + (i === current.ch ? " current" : "");
+              b.innerHTML = '<span class="num">' + (i + 1) + '</span><span></span>';
+              b.lastChild.textContent = ch.t;
+              b.addEventListener("click", function () { closePanel(); goToChapter(i, 0); });
+              panelList.appendChild(b);
+            });
+          } else {
+            panelTitle.textContent = "Marcadores";
+            var bms = loadBookmarks(current.id);
+            if (!bms.length) {
+              var p = document.createElement("p");
+              p.className = "panel-empty";
+              p.textContent = "Nenhum marcador neste livro ainda. Use “Marcar capítulo” para guardar os capítulos a que quer voltar.";
+              panelList.appendChild(p);
+            }
+            bms.forEach(function (i) {
+              var ch = current.book.chapters[i];
+              if (!ch) return;
+              var b = document.createElement("button");
+              b.type = "button";
+              b.className = "panel-item" + (i === current.ch ? " current" : "");
+              b.innerHTML = '<span class="num">' + (i + 1) + '</span><span></span>';
+              b.lastChild.textContent = ch.t;
+              b.addEventListener("click", function () { closePanel(); goToChapter(i, 0); });
+              panelList.appendChild(b);
+            });
+          }
+          panel.hidden = false;
+        }
+        function closePanel() { panel.hidden = true; }
+        document.getElementById("toc-open").addEventListener("click", function () { openPanel("toc"); });
+        document.getElementById("bm-open").addEventListener("click", function () { openPanel("bookmarks"); });
+        document.getElementById("panel-close").addEventListener("click", closePanel);
+
+        // Leitura só para quem tem conta (Supabase Auth): sem sessão logada,
+        // abre a tela de login/criar conta em vez do conteúdo do livro.
+        function requireLogin() {
+          if (window.ArcanumCloud && window.ArcanumCloud.isLoggedIn()) return true;
+          var btn = document.getElementById("auth-btn");
+          if (btn) btn.click();
+          var msg = document.getElementById("auth-msg");
+          if (msg) {
+            msg.textContent = "A leitura é só para quem tem conta: entre ou crie a sua para ler este livro.";
+            msg.hidden = false;
+            msg.className = "auth-msg";
+          }
+          return false;
+        }
+        function openReader(id, btn) {
+          if (!requireLogin()) return;
+          var book = BOOKS[id];
+          if (!book) return;
+          lastFocus = btn || null;
+          var lengths = book.chapters.map(function (c) { return Math.max(1, c.h.length); });
+          var total = lengths.reduce(function (a, b) { return a + b; }, 0);
+          current = { id: id, book: book, ch: 0, lengths: lengths, total: total };
+          applyFont();
+          closePanel();
+          reader.hidden = false;
+          reader.classList.add("open");
+          document.body.style.overflow = "hidden";
+          if (dlLink) {
+            if (PDF_URLS[id]) { dlLink.href = PDF_URLS[id]; dlLink.style.display = ""; }
+            else { dlLink.style.display = "none"; }
+          }
+          var prog = loadProgress(id);
+          if (prog && typeof prog.ch === "number") goToChapter(prog.ch, prog.frac || 0);
+          else goToChapter(0, 0);
+          closeBtn.focus();
+        }
+        function closeReader() {
+          saveProgress();
+          reader.classList.remove("open");
+          reader.hidden = true;
+          document.body.style.overflow = "";
+          current = null;
+          if (lastFocus) lastFocus.focus();
+        }
+        closeBtn.addEventListener("click", closeReader);
+        reader.addEventListener("click", function (e) { if (e.target === reader) closeReader(); });
+        document.addEventListener("keydown", function (e) {
+          if (e.key !== "Escape" || !reader.classList.contains("open")) return;
+          if (!panel.hidden) closePanel(); else closeReader();
+        });
+
+        function renderContinue() {
+          var section = document.getElementById("continue-section");
+          var grid = document.getElementById("continue-grid");
+          var countEl = document.getElementById("continue-count");
+          if (!section || !grid) return;
+          grid.innerHTML = "";
+          var items = [];
+          var buttons = document.querySelectorAll(".read-btn[data-book]");
+          for (var i = 0; i < buttons.length; i++) {
+            var id = buttons[i].getAttribute("data-book");
+            var prog = loadProgress(id);
+            if (prog && prog.pct > 0 && BOOKS[id]) items.push({ id: id, prog: prog, btn: buttons[i] });
+          }
+          items.sort(function (a, b) {
+            var fa = a.prog.pct >= 100 ? 1 : 0;
+            var fb = b.prog.pct >= 100 ? 1 : 0;
+            if (fa !== fb) return fa - fb;
+            return b.prog.pct - a.prog.pct;
+          });
+          if (!items.length) { section.hidden = true; return; }
+          section.hidden = false;
+          if (countEl) countEl.textContent = items.length + (items.length === 1 ? " leitura" : " leituras");
+          items.forEach(function (item) {
+            var book = BOOKS[item.id];
+            var card = document.createElement("article");
+            card.className = "continue-card";
+            var srcCard = item.btn.closest(".book");
+            var srcCover = srcCard ? srcCard.querySelector(".cover") : null;
+            if (srcCover) {
+              var cover = srcCover.cloneNode(true);
+              cover.classList.add("mini");
+              cover.setAttribute("aria-hidden", "true");
+              cover.removeAttribute("role");
+              cover.removeAttribute("aria-label");
+              card.appendChild(cover);
+            }
+            var info = document.createElement("div");
+            info.className = "continue-info";
+            var h = document.createElement("h3");
+            h.textContent = book.title;
+            info.appendChild(h);
+            var where = document.createElement("p");
+            where.className = "continue-where";
+            if (item.prog.pct >= 100) {
+              where.innerHTML = "Leitura concluída <span class=\"done\">✓</span>";
+            } else {
+              var chIdx = Math.min(book.chapters.length - 1, Math.max(0, item.prog.ch || 0));
+              var chName = book.chapters[chIdx] ? book.chapters[chIdx].t : "";
+              where.textContent = "Você parou em: " + chName + " · " + item.prog.pct + "% lido";
+            }
+            info.appendChild(where);
+            var bar = document.createElement("div");
+            bar.className = "card-progress";
+            bar.setAttribute("aria-hidden", "true");
+            bar.innerHTML = "<span></span>";
+            bar.firstChild.style.width = item.prog.pct + "%";
+            info.appendChild(bar);
+            var resumeBtn = document.createElement("button");
+            resumeBtn.type = "button";
+            resumeBtn.className = "btn";
+            resumeBtn.textContent = item.prog.pct >= 100 ? "Ler novamente" : "Continuar lendo";
+            (function (bookId, b) {
+              b.addEventListener("click", function () { openReader(bookId, b); });
+            })(item.id, resumeBtn);
+            info.appendChild(resumeBtn);
+            card.appendChild(info);
+            grid.appendChild(card);
+          });
+        }
+
+        function refreshCards() {
+          renderContinue();
+          var buttons = document.querySelectorAll(".read-btn[data-book]");
+          for (var i = 0; i < buttons.length; i++) {
+            (function (btn) {
+              var id = btn.getAttribute("data-book");
+              var label = btn.querySelector(".btn-label");
+              var prog = loadProgress(id);
+              var card = btn.closest(".book");
+              var bar = card ? card.querySelector(".card-progress") : null;
+              if (prog && prog.pct > 0) {
+                if (label) label.textContent = prog.pct >= 100 ? "Ler novamente" : "Continuar lendo · " + prog.pct + "%";
+                if (!bar && card) {
+                  bar = document.createElement("div");
+                  bar.className = "card-progress";
+                  bar.setAttribute("aria-hidden", "true");
+                  bar.innerHTML = "<span></span>";
+                  card.appendChild(bar);
+                }
+                if (bar) bar.firstChild.style.width = prog.pct + "%";
+              } else {
+                if (label) label.textContent = "Ler online";
+                if (bar) bar.remove();
+              }
+            })(buttons[i]);
+          }
+        }
+
+        var readButtons = document.querySelectorAll(".read-btn[data-book]");
+        for (var i = 0; i < readButtons.length; i++) {
+          readButtons[i].addEventListener("click", function () { openReader(this.getAttribute("data-book"), this); });
+        }
+        
+        /* ---------- Busca e filtros do acervo (não somem com o "Continuar lendo") ---------- */
+        (function () {
+          var search = document.getElementById("book-search");
+          var noResults = document.getElementById("no-results");
+          var countEl = document.getElementById("acervo-count");
+          var cards = Array.prototype.slice.call(document.querySelectorAll(".grid .book"));
+          var chips = Array.prototype.slice.call(document.querySelectorAll(".filters .chip"));
+          var activeFilter = "todos";
+          function applyFilter() {
+            var q = search ? search.value.trim().toLowerCase() : "";
+            var visible = 0;
+            cards.forEach(function (card) {
+              var title = (card.getAttribute("data-title") || "").toLowerCase();
+              var kind = card.getAttribute("data-kind") || "";
+              var ok = (activeFilter === "todos" || kind === activeFilter) && (!q || title.indexOf(q) !== -1);
+              card.hidden = !ok;
+              if (ok) visible++;
+            });
+            if (noResults) noResults.hidden = cards.length === 0 || visible !== 0;
+            if (countEl) countEl.textContent = visible + (visible === 1 ? " obra" : " obras");
+          }
+          if (search) search.addEventListener("input", applyFilter);
+          chips.forEach(function (chip) {
+            chip.addEventListener("click", function () {
+              chips.forEach(function (c) { c.classList.remove("active"); });
+              chip.classList.add("active");
+              activeFilter = chip.getAttribute("data-filter") || "todos";
+              applyFilter();
+            });
+          });
+          applyFilter();
+        })();
+        // Ponte para a área de login (supabase-auth.js): atualiza os cards
+        // e o "Continuar lendo" depois de sincronizar com a conta.
+        window.ArcanumReader = { refreshCards: refreshCards };
+refreshCards();
+      })();
+    </script>
+
+
+    <!-- Área de login — e-mail e senha (Supabase Auth) -->
+    <div class="auth-modal" id="auth-modal" hidden role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
+      <div class="auth-box">
+        <button class="auth-close" id="auth-close" type="button" aria-label="Fechar">×</button>
+        <h3 id="auth-modal-title">Entrar na Biblioteca</h3>
+        <p class="auth-sub">Sua conta guarda seu progresso e seus favoritos — cada um lê no seu lugar.</p>
+        <p class="auth-notice" id="auth-not-configured" hidden>A área de login ainda está sendo ligada. Volte em breve.</p>
+        <div class="auth-tabs" role="tablist">
+          <button class="auth-tab active" id="tab-login" type="button">Entrar</button>
+          <button class="auth-tab" id="tab-signup" type="button">Criar conta</button>
+        </div>
+        <form id="auth-form" novalidate>
+          <label>E-mail
+            <input type="email" id="auth-email" required autocomplete="email" placeholder="seu@email.com" />
+          </label>
+          <label>Senha
+            <input type="password" id="auth-password" required minlength="6" autocomplete="current-password" placeholder="mínimo 6 caracteres" />
+          </label>
+          <p class="auth-msg" id="auth-msg" role="alert" hidden></p>
+          <button class="btn auth-submit" id="auth-submit" type="submit">Entrar</button>
+        </form>
+        <button class="auth-link" id="auth-forgot" type="button">Esqueci a senha</button>
+        <form id="auth-reset-form" hidden novalidate>
+          <label>E-mail
+            <input type="email" id="auth-reset-email" required autocomplete="email" placeholder="seu@email.com" />
+          </label>
+          <p class="auth-msg" id="auth-reset-msg" role="alert" hidden></p>
+          <button class="btn auth-submit" type="submit">Enviar link de recuperação</button>
+          <button class="auth-link" id="auth-reset-back" type="button">Voltar</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Minha conta -->
+    <div class="auth-modal" id="account-modal" hidden role="dialog" aria-modal="true" aria-labelledby="account-title">
+      <div class="auth-box">
+        <button class="auth-close" id="account-close" type="button" aria-label="Fechar">×</button>
+        <h3 id="account-title">Minha conta</h3>
+        <p class="auth-sub" id="account-email"></p>
+        <p class="auth-sub small" id="account-since"></p>
+        <h4 class="auth-h4">Meus favoritos</h4>
+        <ul class="auth-favs" id="account-favs"></ul>
+        <h4 class="auth-h4">Trocar senha</h4>
+        <form id="account-pass-form" novalidate>
+          <label>Nova senha
+            <input type="password" id="account-new-pass" required minlength="6" autocomplete="new-password" placeholder="mínimo 6 caracteres" />
+          </label>
+          <p class="auth-msg" id="account-pass-msg" role="alert" hidden></p>
+          <button class="btn auth-submit" type="submit">Trocar senha</button>
+        </form>
+        <div class="auth-danger">
+          <button class="btn danger auth-submit" id="account-delete" type="button">Excluir minha conta</button>
+          <p class="auth-msg" id="account-delete-msg" role="alert" hidden></p>
+        </div>
+        <button class="btn secondary auth-submit" id="account-logout" type="button">Sair</button>
+      </div>
+    </div>
+    <div class="auth-toast" id="auth-toast" hidden></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="supabase-auth.js"></script>
+
+  </body>
+</html>
